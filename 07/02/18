@@ -1,0 +1,25 @@
+###Vector de 15 datos en un rango de 100 y 120, sin remplazo
+pob <- sample (100:120, 15, replace=F)
+###Mirar el vector
+pob
+#Declarar el vector como una serie de tiempo
+#el argumento de frecuencia es cuantas veces al año se repite la serie. e.g. 365 diario, 1 anual, etc.
+pobts<- ts(pob, frequency = 1, start = (2000))
+#Pa´preguntar cuando termina la serie
+end(pobts)
+#Pa´preguntar cuando inicia la serie
+start(pobts)
+#Para graficar la serie
+plot(pobts)
+plot(aggregate(pobts))
+##Instalar paqueteria para leer archivos externos
+install.packages("foreign")
+#Usar la libreria instalada
+library(foreign)
+#Same as line 2
+infor4 <- read.csv("C://Users//Ruben//Documents//8°//Series//Tasa informalidad.csv")
+infor4ts <- ts(infor4, frequency = 4, start = (2005))
+plot(infor4ts, ylim = c(0,100))
+
+end(infor4ts)
+start(infor4ts)
