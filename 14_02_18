@@ -1,0 +1,19 @@
+#Datos de registros de enfermos del 2000 al 2001 semestral
+#350, 358, 367, 367, 380, 388, 402, 415, 432, 450,
+#NA, NA, NA, NA, 367, 342, 324, 315, 310, 298, 350
+
+x <- c(350, 358, 367, 367, 380, 388, 402, 415, 432, 450, NA, NA, NA, NA, 367, 342, 324, 315, 310, 298, 350)
+plot(x)
+xts <- ts(x, frequency = 2, start = (2000))
+plot(xts)
+mean(xts, na.rm=T)
+#Imputar datos con la media
+xts[11:14] <- mean(xts, na.rm=T)
+
+#Graficar ST precargada
+plot(EuStockMarkets)
+#Comparar graficos de series de tiempo
+ts.plot(EuStockMarkets, col=1:4)
+
+#install.packages("randomForest")
+#library(randomForest);
