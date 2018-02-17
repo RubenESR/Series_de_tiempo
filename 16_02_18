@@ -1,0 +1,84 @@
+aa <- AirPassengers
+plot(aa)
+
+#Quitar la estacionalidad para solo ver la tendencia usar "aggregate"
+plot(aggregate(aa))
+
+#Grafica de caja de brazo por periodo
+boxplot(aa~cycle(aa))
+
+
+deso <- read.csv("C://Users//Ruben//Documents//8°//Series//desocupacion.csv")
+
+#Declarar que la serie emplieza en el tercer trimestre del 2005
+#desots <- ts(deso, frequency = 4, start = c(2005,3))
+desots <- ts(deso, frequency = 4, start = 2005)
+
+#Convertir la serie trimestral a anual
+desoanual <- aggregate(desots)/4
+
+#abrir en una ventana nueva
+x11()
+layout(1:2)  #! ventana, 2 graficas, toma las 2 graficas inmediatas
+plot(desots)
+plot(desoanual)
+
+#Dividir la serie de tiempo
+deso1 <- window(desots, start = c(2008, 2), end = c(2015, 4))
+
+#Ejercicio 1: Descargar: Tasa de ocupacion parcial y desocupacion, tasa de asalariados, Til1
+tasa <- read.csv("C://Users//Ruben//Documents//8°//Series//ocupacion parcial y desocupacion, asalariados y Til1.csv")
+
+#Extraer diferentes series de tiempo provenientes del mismo archivo
+ts1 <- ts(tasa[,1], frequency = 4, start = 2005)
+ts2 <- ts(tasa[,2], frequency = 4, start = 2005)
+ts3 <- ts(tasa[,3], frequency = 4, start = 2005)
+
+#Generar serie de tiempo multiple
+multiple <- ts.intersect(ts1, ts2, ts3)
+plot(multiple)
+ts.plot(multiple, col=1:3)
+
+#Ejercicio 2: descarga 4 series de tiempo con min. 30 datos
+#a) Importarlas de manera individual, graficarlas
+#b) Crear serie multiple y graficar
+#c) dividir 2 de las 4 en 3 periodos de intervalos iguales
+#d) Elegir 2 seies y aplicar aggregate para conocer la tendencia, realizar grafica de caja
+#Interpretar los periodos de estas series
+
+#a)
+base <- read.csv("C://Users//Ruben//Documents//8°//Series//Tasas.csv")
+
+matrimoniots <- ts(base[,1], frequency = 12, start = 2005)
+divorciots <- ts(base[,2], frequency = 12, start = 2005)
+natalidadts <- ts(base[,3], frequency = 12, start = 2005)
+mortalidadts <- ts(base[,4], frequency = 12, start = 2005)
+
+ts.plot(matrimoniots)
+ts.plot(divorciots)
+ts.plot(natalidadts)
+ts.plot(mortalidadts)
+
+#b)
+multiplets <- ts.intersect(matrimoniots, divorciots, natalidadts, mortalidadts)
+ts.plot(multiplets, col=1:4)
+
+#c)
+ma1 <- window(matrimoniots, start = c(2005, 1), end = c(2007, 4))
+ma2 <- window(matrimoniots, start = c(2008, 1), end = c(2010, 4))
+ma3 <- window(matrimoniots, start = c(2011, 1), end = c(2012, 4))
+
+div1 <- window(divorciots, start = c(2005, 1), end = c(2007, 4))
+div1 <- window(divorciots, start = c(2008, 1), end = c(2010, 4))
+div1 <- window(divorciots, start = c(2011, 1), end = c(2012, 4))
+
+#d)
+x11()
+layout(1:2)
+plot(aggregate(natalidadts))
+boxplot(natalidadts~cycle(natalidadts))
+
+x11()
+layout(1:2)
+plot(aggregate(mortalidadts))
+boxplot(natalidadts~cycle(mortalidadts))
