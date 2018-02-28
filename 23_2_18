@@ -1,0 +1,46 @@
+serie1 <-sample(200:1000, 120)
+tserie1 <- ts(serie1, frequency = 12, start = 2002)
+tdesco <- decompose(tserie1)
+plot(tdesco)
+ts.plot(tdesco)
+names(tdesco)
+
+#Valor de st en Enero 2003: 279
+tserie1
+
+#valor de la tendencia Enero 2003: 525.0833
+tdesco$trend
+
+#Valor de la estacionalidad Enero 2003: 95.89931
+tdesco$seasonal
+
+#valor componente aleatorio Enero 2003: -341.982639
+tdesco$random
+
+#Comprobacion sumando los componentes
+525.0833+95.89931-341.982639
+
+# Bajar datos del pib (tasa anual de crecimiento) en méxico desde 1950 hasta 2015
+# Dividir la gráfica en 2 series de tiempo: 1950 - 1980, 1981 - 2015
+# Hacer una grafica completa 1950 - 2015
+# Mostrar las tre gráficas en una misma ventana
+# Gráficas con titulo principal, eje x, y y subtitulo (fuente) con diferentes colores
+# descomponer las 3 st y verificar para los años 1980, 2000, y 2015
+# Interpretar y analizar  asociando con eventos políticos y económicos
+pib<-read.csv("C://Users//Ruben//Documents//8°//Series//Crecimiento anual.csv")
+tspib<- ts(pib, frequency = 1, start = 1961)
+
+tspib1 <- window(tspib, end=1980)
+tspib2 <- window(tspib, start=1981)
+
+x11()
+layout(1:3)
+plot(tspib, col=2, xlab="Periodo 1961 - 2016", ylab="Porcentaje", main="Crecimiento anual del PIB de México")
+points(1995, -5.75868238, pch=15,col=1)
+text(1995, -5.75868238, labels = "Crisis del 95")
+plot(tspib1, col=3, xlab="Periodo 1961 - 1980", ylab="Porcentaje")
+plot(tspib2, col=4, xlab="Periodo 1981 - 2016", ylab="Porcentaje", sub="Fuente: https://datos.bancomundial.org/indicador/NY.GDP.MKTP.KD.ZG?end=2016&locations=MX&start=1961&view=chart")
+points(1995, -5.75868238, pch=15, col=1)
+text(1995, -5.75868238, labels = "Crisis del 95")
+points(2009, -4.700338863, pch=15,col=1)
+text(2009, -4.700338863, labels = "Crisis del 2009")
