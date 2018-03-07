@@ -1,0 +1,50 @@
+#Modelos lineales para pronosticar
+#Son la aplicacion de pronosticos lineales como los metodos de la media,
+#el ingenuo, el ingenuo estacional
+
+#---Ingenuo---
+#Está basado en la ultima observacion que arroja la serie de tiempo,
+#i.e. este pronostico asume que la observacion más importante es la última
+#Funcion en R: naive(serie, h=num pronostico)
+#h= número de pronosticos que requiero
+
+#---Método de la media---
+#Este metodo le da el mismo peso a todos los datos u observaciones,
+#se asume con este metodo que todas las observaciones tienen la misma importancia por lo que
+#el pronostico es un promedio de todas las observaciones
+#FUNCION EN R: meanf(serie, h=numero de pronosticos)
+
+#---Ingenuo estacional---
+#Este metodo se utiliza en st con alta estacionalidad, este proceso consiste en darle
+#el mayor peso o mayor ponderacion al dato del mismo periodo en el año anterior
+#FUNCION EN R: snaive(serie, h=num de pronosticos)
+
+#---Metodo de la deriva---
+#FUNCION EN R: rfw(serie, h=num de pronostico, drift=)
+#
+#
+
+require(fpp)
+deso <- read.csv("C://Users//Ruben//Documents//8°//Series//desocupacion.csv")
+desots <- ts(deso, start = 2005, frequency = 4)
+
+desocmod1 <- meanf(desots, h=10)
+desocmod2 <- naive(desots, h=10)
+desocmod3 <- snaive(desots, h=10)
+desocmod4 <- rwf(desots, h=10, drift = TRUE)
+
+x11()
+plot(desocmod1, main = "Tasa de desocupacion trimestral", col = "green")
+lines(desocmod1$mean, col = "red")
+lines(desocmod2$mean, col = "blue")
+lines(desocmod3$mean, col = "orange")
+lines(desocmod4$mean, col = "black")
+legend("topleft", lty=1, col=c("red","blue","orange","black"), legend=c("media","ingenuo", "ingenuo estacional", "deriva"))
+
+x11()
+plot(desocmod1, main = "Tasa de desocupacion trimestral", col = "green")
+lines(desocmod1$fitted, col = "red")
+lines(desocmod2$fitted, col = "blue")
+lines(desocmod3$fitted, col = "orange")
+lines(desocmod4$fitted, col = "black")
+legend("topleft", lty=1, col=c("red","blue","orange","black"), legend=c("media", "ingenuo", "ingenuo estacional", "deriva"))
