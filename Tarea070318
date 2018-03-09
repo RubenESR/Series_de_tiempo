@@ -1,15 +1,15 @@
 base <- read.csv("C://Users//Ruben//Documents//8°//Series//Datos históricos televisa.csv")
 
-televisats <- ts(base[2:253,2], frequency = 12, start = c(2017, 3), end = c(2018, 3))
+televisats <- ts(base[2:253,2], frequency = 252, start = c(2017, 65), end = c(2018, 65))
 
 televisats
 
 require(fpp)
 
-tltsmod1 <- meanf(televisats, h=6)
-tltsmod2 <- naive(televisats, h=6)
-tltsmod3 <- snaive(televisats, h=6)
-tltsmod4 <- rwf(televisats, h=6, drift = TRUE)
+tltsmod1 <- meanf(televisats, h=252)
+tltsmod2 <- naive(televisats, h=252)
+tltsmod3 <- snaive(televisats, h=252)
+tltsmod4 <- rwf(televisats, h=252, drift = TRUE)
 
 x11()
   plot(tltsmod1, main = "Acciones de Televisa", sub = "Periodo: 06/03/2017 - 06/03/2018", col = "green")
