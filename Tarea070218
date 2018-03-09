@@ -1,0 +1,35 @@
+base <- read.csv("C://Users//Ruben//Documents//8°//Series//Datos históricos televisa.csv")
+
+televisats <- ts(base[2:253,2], frequency = 12, start = c(2017, 3), end = c(2018, 3))
+
+televisats
+
+require(fpp)
+
+tltsmod1 <- meanf(televisats, h=6)
+tltsmod2 <- naive(televisats, h=6)
+tltsmod3 <- snaive(televisats, h=6)
+tltsmod4 <- rwf(televisats, h=6, drift = TRUE)
+
+x11()
+  plot(tltsmod1, main = "Acciones de Televisa", sub = "Periodo: 06/03/2017 - 06/03/2018", col = "green")
+    lines(tltsmod1$mean, col = "red")
+    lines(tltsmod2$mean, col = "blue")
+    lines(tltsmod3$mean, col = "orange")
+    lines(tltsmod4$mean, col = "brown")
+#    lines(tltsmod1$fitted, col = "red")
+#    lines(tltsmod2$fitted, col = "blue")
+#    lines(tltsmod3$fitted, col = "orange")
+#    lines(tltsmod4$fitted, col = "brown")
+#      legend("topleft", lty=1, col=c("green","red","blue","orange","brown"), legend=c("Datos originales","media", "ingenuo", "ingenuo estacional", "deriva"))
+      legend("topright", lty = 1, col=c("red","blue","orange","brown"), legend=c("media","ingenuo", "ingenuo estacional", "deriva"))
+#        mtext("PRONOSTICOS", side = 1, line = 3, adj = 1)
+#        mtext("MODELOS AJUSTADOS", side = 1, line = 3, adj = 0)
+
+x11()
+  plot(tltsmod1, main = "Tasa de desocupacion trimestral", sub = "Periodo: 06/03/2017 - 06/03/2018", col = "green")
+    lines(tltsmod1$fitted, col = "red")
+    lines(tltsmod2$fitted, col = "blue")
+    lines(tltsmod3$fitted, col = "orange")
+    lines(tltsmod4$fitted, col = "black")
+      legend("topleft", lty=1, col=c("green","red","blue","orange","black"), legend=c("Datos originales","media", "ingenuo", "ingenuo estacional", "deriva"))
