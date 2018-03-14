@@ -1,0 +1,130 @@
+require(questionr)
+require(foreign)
+require(dplyr)
+
+# ----------> Año 2005 <-----
+  # ----------> Tasa de desocupacion Veracruz T1 2005 <---------
+  t105 <- read.dbf("C://Users//Ruben//Documents//8°//Series//Estimacion de tasas//sdemt105.dbf")
+
+  V105 <- filter(select(t105, ENT, CLASE1, CLASE2, POS_OCU, TUE2, FAC), ENT==30)
+
+  Clase1105 <- data.frame(wtd.table(V105$CLASE1, weights = V105$FAC))
+    PEA105 <- Clase1105[2,2]
+
+  Clase2105 <- data.frame(wtd.table(V105$CLASE2, weights = V105$FAC))
+    PDes105 <- Clase2105[3,2]
+
+      d105 <- PDes105/PEA105*100   
+
+  # ----------> Tasa de desocupacion Veracruz T2 2005 <---------
+  t205 <- read.dbf("C://Users//Ruben//Documents//8°//Series//Estimacion de tasas//sdemt205.dbf")
+    
+  V205 <- filter(select(t205, ENT, CLASE1, CLASE2, POS_OCU, TUE2, FAC), ENT==30)
+      
+  Clase1205 <- data.frame(wtd.table(V205$CLASE1, weights = V205$FAC))
+    PEA205 <- Clase1205[2,2]
+      
+  Clase2205 <- data.frame(wtd.table(V205$CLASE2, weights = V205$FAC))
+    PDes205 <- Clase2205[3,2]
+      
+      d205 <- PDes205/PEA205*100
+
+  # ----------> Tasa de desocupacion Veracruz T3 2005 <---------
+  t305 <- read.dbf("C://Users//Ruben//Documents//8°//Series//Estimacion de tasas//sdemt305.dbf")
+      
+  V305 <- filter(select(t305, ENT, CLASE1, CLASE2, POS_OCU, TUE2, FAC), ENT==30)
+      
+  Clase1305 <- data.frame(wtd.table(V305$CLASE1, weights = V305$FAC))
+    PEA305 <- Clase1305[2,2]
+      
+  Clase2305 <- data.frame(wtd.table(V305$CLASE2, weights = V305$FAC))
+    PDes305 <- Clase2305[3,2]
+      
+      d305 <- PDes305/PEA305*100
+      
+  # ----------> Tasa de desocupacion Veracruz T4 2005 <----  
+  t405 <- read.dbf("C://Users//Ruben//Documents//8°//Series//Estimacion de tasas//sdemt405.dbf")
+      
+  V405 <- filter(select(t405, ENT, CLASE1, CLASE2, POS_OCU, TUE2, FAC), ENT==30)
+      
+  Clase1405 <- data.frame(wtd.table(V405$CLASE1, weights = V405$FAC))
+    PEA405 <- Clase1405[2,2]
+      
+  Clase2405 <- data.frame(wtd.table(V405$CLASE2, weights = V405$FAC))
+    PDes405 <- Clase2405[3,2]
+      
+      d405 <- PDes405/PEA405*100
+
+        desocup2005 <- c(d105, d205, d305, d405)    
+
+# ----------> 2006 <-----
+  # ----------> Tasa de desocupacion Veracruz T1 2006 <---------
+  t106 <- read.dbf("C://Users//Ruben//Documents//8°//Series//Estimacion de tasas//sdemt106.dbf")
+        
+  V106 <- filter(select(t106, ENT, CLASE1, CLASE2, POS_OCU, TUE2, FAC), ENT==30)
+        
+  Clase1106 <- data.frame(wtd.table(V106$CLASE1, weights = V106$FAC))
+    PEA106 <- Clase1106[2,2]
+        
+  Clase2106 <- data.frame(wtd.table(V106$CLASE2, weights = V106$FAC))
+    PDes106 <- Clase2106[3,2]
+        
+      d106 <- PDes106/PEA106*100   
+        
+  # ----------> Tasa de desocupacion Veracruz T2 2006 <---------
+  t206 <- read.dbf("C://Users//Ruben//Documents//8°//Series//Estimacion de tasas//sdemt206.dbf")
+      
+  V206 <- filter(select(t206, ENT, CLASE1, CLASE2, POS_OCU, TUE2, FAC), ENT==30)
+      
+  Clase1206 <- data.frame(wtd.table(V206$CLASE1, weights = V206$FAC))
+    PEA206 <- Clase1206[2,2]
+      
+  Clase2206 <- data.frame(wtd.table(V206$CLASE2, weights = V206$FAC))
+    PDes206 <- Clase2206[3,2]
+      
+      d206 <- PDes206/PEA206*100   
+      
+  # ----------> Tasa de desocupacion Veracruz T3 2006 <---------
+  t306 <- read.dbf("C://Users//Ruben//Documents//8°//Series//Estimacion de tasas//sdemt306.dbf")
+        
+  V306 <- filter(select(t306, ENT, CLASE1, CLASE2, POS_OCU, TUE2, FAC), ENT==30)
+        
+  Clase1306 <- data.frame(wtd.table(V306$CLASE1, weights = V306$FAC))
+    PEA306 <- Clase1306[2,2]
+        
+  Clase2306 <- data.frame(wtd.table(V306$CLASE2, weights = V306$FAC))
+    PDes306 <- Clase2306[3,2]
+        
+      d306 <- PDes306/PEA306*100
+        
+  # ----------> Tasa de desocupacion Veracruz T4 2006 <----  
+  t406 <- read.dbf("C://Users//Ruben//Documents//8°//Series//Estimacion de tasas//sdemt406.dbf")
+        
+  V406 <- filter(select(t406, ENT, CLASE1, CLASE2, POS_OCU, TUE2, FAC), ENT==30)
+        
+  Clase1406 <- data.frame(wtd.table(V406$CLASE1, weights = V406$FAC))
+    PEA406 <- Clase1406[2,2]
+        
+  Clase2406 <- data.frame(wtd.table(V406$CLASE2, weights = V406$FAC))
+    PDes406 <- Clase2406[3,2]
+        
+      d406 <- PDes406/PEA406*100
+        
+        desocup2006 <- c(d106, d206, d306, d406)    
+
+        
+# ----------> ST 2005-2006 (Comprobacion) <-----        
+deso <- c(desocup2005, desocup2006)
+  tsdeso <- ts(deso, frequency = 4, start = 2005)        
+
+deso1 <- read.csv("C://Users//Ruben//Documents//8°//Series//v05-06.csv")
+  tsdeso1 <- ts(deso1, frequency = 4, start = 2005)
+
+comp <- data.frame(deso, deso1)
+
+x11()
+layout(1:2)
+  plot(tsdeso)
+  plot(tsdeso1)
+  
+View(comp)
